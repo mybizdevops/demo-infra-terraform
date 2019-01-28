@@ -43,6 +43,14 @@ resource "aws_security_group" "elb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # HTTPS access from anywhere
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # outbound internet access
   egress {
     from_port   = 0
@@ -96,6 +104,14 @@ resource "aws_elb" "web" {
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
+  }
+
+  listener {
+    instance_port      = 3000
+    instance_protocol  = "http"
+    lb_port            = 443
+    lb_protocol        = "https"
+    ssl_certificate_id = "${aws_acm_certificate_validation.cert.certificate_arn}"
   }
 }
 
