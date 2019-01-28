@@ -9,6 +9,9 @@ Here you'll find all required files to roll out the demo infrastructure as seen 
 To try yourself make sure [Terraform](https://www.terraform.io/) is installed locally. Customize the vars.tf files to 
 your needs. 
 
+The servers are booted with a custom AMI (image) which contains the application. This AMI must be prepared and available in your
+AWS account. To create it navigate to it's [GitHub Repo](https://github.com/mybizdevops/demo-images-packer).
+
 In order to have the DNS and certificate portions working properly make sure the the Route53 zone is already created and your registrar
 uses the required name servers.
 
